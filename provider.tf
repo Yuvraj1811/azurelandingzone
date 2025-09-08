@@ -24,11 +24,8 @@ provider "azurerm" {
 }
 
 data "azurem_key_vault" "kv" {
-
   name                = "keyvaultcredential01"
   resource_group_name = "rg-keyvault"
-
-
 }
 
 data "azurerm_key_vault_secret" "client_id" {
