@@ -16,10 +16,38 @@ terraform {
 
 provider "azurerm" {
   features {}
-  subscription_id = var.subscription_id
-  client_id       = var.client_id
-  client_secret   = var.client_secret
-  tenant_id       = var.tenant_id
+  subscription_id = data.azurerm_key_vault_secret.subscription_id.value
+  client_id       = data.azurerm_key_vault_secret.client_id.value
+  client_secret   = data.azurerm_key_vault_secret.client_secret.value
+  tenant_id       = data.azurerm_key_vault_secret.tenant_id.value
 
+}
+
+data "azurem_key_vault" "kv" {
+
+  name                = "keyvaultcredential01"
+  resource_group_name = "rg-keyvault"
+
+
+}
+
+data "azurerm_key_vault_secret" "client_id" {
+  name         = "client-id"
+  key_vault_id = data.azurem_key_vault.kv.id
+}
+
+data "azurerm_key_vault_secret" "client_secret" {
+  name         = "client-secret"
+  key_vault_id = data.azurem_key_vault.kv.id
+}
+
+data "azurerm_key_vault_secret" "subscription_id" {
+  name         = "subscription-id"
+  key_vault_id = data.azurem_key_vault.kv.id
+}
+
+data "azurerm_key_vault_secret" "tenant_id" {
+  name         = "tenant-id"
+  key_vault_id = data.azurem_key_vault.kv.id
 }
 
