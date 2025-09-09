@@ -18,3 +18,11 @@ variable "subnets" {
   description = "A map of subnets with their address prefix"
   type        = map(list(string))
 }
+
+variable "nic_map" {
+  description = "A map of NICs to create with subnet IDs"
+  type = map(object({
+    name      = string
+    subnet_id = string
+  }))
+}
