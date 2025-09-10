@@ -40,3 +40,7 @@ variable "admin_password" {
   sensitive = true
 }
 
+variable "strg_name" {
+    type = string
+  
+}

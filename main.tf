@@ -4,6 +4,14 @@ module "resource_group" {
   location            = var.location
 }
 
+module "strg_account" {
+  source = "./modules/storage_account"
+  strg_name = var.strg_name
+  resource_group_name = module.resource_group.rg_name_output
+  location = module.resource_group.location_output
+  
+}
+
 module "virtual_network" {
   source              = "./modules/vnet"
   vnet_name           = var.vnet_name
