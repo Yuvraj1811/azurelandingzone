@@ -26,3 +26,17 @@ variable "nic_map" {
     subnet_id = string
   }))
 }
+
+variable "vm_name" {
+  type = string
+}
+
+variable "admin_username" {
+  type = string
+}
+
+variable "admin_password" {
+  type      = string
+  sensitive = true
+}
+

@@ -37,3 +37,26 @@ module "network_interface" {
     }
   }
 }
+
+
+module "vm_frontend" {
+  source              = "./modules/virtual_machine"
+  vm_name             = "vm-frontend"
+  resource_group_name = module.resource_group.rg_name_output
+  location            = module.resource_group.location_output
+  nic_id              = module.network_interface.nic_ids["frontend"]
+  admin_username      = var.admin_username
+  admin_password      = var.admin_password
+
+}
+
+module "vm_backend" {
+  source              = "./modules/virtual_machine"
+  vm_name             = "vm-backend"
+  resource_group_name = module.resource_group.rg_name_output
+  location            = module.resource_group.location_output
+  nic_id              = module.network_interface.nic_ids["backend"]
+  admin_username      = var.admin_username
+  admin_password      = var.admin_password
+
+}
